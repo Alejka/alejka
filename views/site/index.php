@@ -70,13 +70,6 @@ $this->registerJs('$(".fancybox").fancybox();');
                     <a href="https://www.facebook.com/aleksey.samohvalov.75" target="_blank">https://www.facebook.com/aleksey.samohvalov.75</a>
                 </div>
             </div>
-            <div class="contact-item">
-                <div class="icon pull-left text-center"><span class="fa fa-vk fa-fw"></span></div>
-                <div class="title pull-right">VKontakte</div>
-                <div class="description pull-right">
-                    <a href="http://vk.com/kluivert" target="_blank">http://vk.com/kluivert</a>
-                </div>
-            </div>
             <div class="clearfix"></div>
         </div>
         <!-- EDUCATION -->
