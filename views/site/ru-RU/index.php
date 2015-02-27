@@ -1,5 +1,7 @@
 <?php
 use frontend\assets\AppAsset;
+use alejka\fancybox2\FancyBox;
+use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 $this->title = 'Самохвалов Алексей - Резюме';
@@ -8,12 +10,45 @@ $this->title = 'Самохвалов Алексей - Резюме';
 $this->registerCssFile('/css/font-awesome.css');
 $this->registerCssFile('/css/main.css', ['depends' => [\yii\bootstrap\BootstrapAsset::className()]]);
 $this->registerJsFile('/js/scripts.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-
-$this->registerJsFile('/libs/fancybox/jquery.mousewheel-3.0.6.pack.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerCssFile('/libs/fancybox/jquery.fancybox.css?v=2.1.5');
-$this->registerJsFile('/libs/fancybox/jquery.fancybox.pack.js?v=2.1.5', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJs('$(".fancybox").fancybox();');
+FancyBox::widget([
+    'target' => '.fancybox',
+    'options' => [
+        'loop' => false,
+        'padding' => 0,
+        'margin' => [15, 15, 60, 15],
+        'afterLoad' => new JsExpression(
+            "function() {
+                console.log(1);
+                var list = $('#links');
+                if (!list.length) {    
+                    list = $('<ul id=\"links\">');
+                    for (var i = 0; i < this.group.length; i++) {
+                        $('<li data-index=\"' + i + '\"><label></label></li>').click(function() { $.fancybox.jumpto( $(this).data('index'));}).appendTo( list );
+                    }
+                    list.appendTo('body');
+                }
+                list.find('li').removeClass('active').eq( this.index ).addClass('active');
+            }"
+        ),
+//        'afterLoad' => "function() {
+//            console.log(1);
+//            var list = $('#links');
+//            if (!list.length) {    
+//                list = $('<ul id=\"links\">');
+//                for (var i = 0; i < this.group.length; i++) {
+//                    $('<li data-index=\"' + i + '\"><label></label></li>').click(function() { $.fancybox.jumpto( $(this).data('index'));}).appendTo( list );
+//                }
+//                list.appendTo('body');
+//            }
+//            list.find('li').removeClass('active').eq( this.index ).addClass('active');
+//        }",
+        'beforeClose' => "function() {
+            $('#links').remove();
+        }",
+    ],
+]);
 ?>
+
 <div class="row">
     <div class="col-xs-12">
         <a href="/en" class="flag">
