@@ -1,5 +1,7 @@
 <?php
 use frontend\assets\AppAsset;
+use alejka\fancybox2\FancyBox;
+use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 $this->title = 'Samokhvalov Aleksey - CV';
